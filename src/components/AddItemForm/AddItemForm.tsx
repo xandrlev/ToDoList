@@ -1,6 +1,6 @@
-import { AddBox, AddCircle } from "@mui/icons-material";
-import { Button, Icon, IconButton, TextField } from "@mui/material";
 import { useState, ChangeEvent, KeyboardEvent, MouseEvent } from "react";
+import { AddBox } from "@mui/icons-material";
+import { IconButton, TextField } from "@mui/material";
 
 type PropsType = {
   addItem: (title: string) => void;

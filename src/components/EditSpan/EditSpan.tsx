@@ -1,5 +1,5 @@
+import { useState, ChangeEvent } from "react";
 import { TextField } from "@mui/material";
-import { useState, ChangeEvent, KeyboardEvent, MouseEvent } from "react";
 
 type EditSpanPropsType = {
   title: string;

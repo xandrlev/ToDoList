@@ -31,6 +31,6 @@ export const userReducer = (
         name: action.newName,
       };
     default:
-      throw new Error("Unknown action.type");
+      return state;
   }
 };

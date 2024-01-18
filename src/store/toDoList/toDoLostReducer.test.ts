@@ -1,4 +1,4 @@
-import { FilterValuesType, ToDoListType } from "../../App";
+import { FilterValuesType, ToDoListType } from "../../AppWithRedux";
 import {
   changeToDoListTitleAC,
   filterToDoListAC,

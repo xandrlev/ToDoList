@@ -1,4 +1,4 @@
-import { TaskStateType } from "../../App";
+import { TaskStateType } from "../../AppWithRedux";
 import { removeToDoListAC, addToDoListAC } from "../toDoList/toDoLostReducer";
 import {
   removeTaskAC,
