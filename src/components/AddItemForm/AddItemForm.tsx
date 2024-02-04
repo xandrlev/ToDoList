@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, ChangeEvent, KeyboardEvent, MouseEvent } from "react";
 import { AddBox } from "@mui/icons-material";
 import { IconButton, TextField } from "@mui/material";
@@ -6,7 +7,8 @@ type PropsType = {
   addItem: (title: string) => void;
 };
 
-export const AddItemForm = (props: PropsType) => {
+export const AddItemForm = React.memo((props: PropsType) => {
+  
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [error, setError] = useState<string | null>(null);
 
@@ -29,7 +31,7 @@ export const AddItemForm = (props: PropsType) => {
   };
 
   const onKeyDownInputTask = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError(null);
+    if (error !== null) setError(null);
     if (e.key === "Enter") {
       handlerAddTask(newTaskTitle);
     }
@@ -61,4 +63,4 @@ export const AddItemForm = (props: PropsType) => {
       {/* {error && <div className="error-message">{error}</div>} */}
     </div>
   );
-};
+});

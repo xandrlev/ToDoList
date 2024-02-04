@@ -1,12 +1,15 @@
+import React from "react";
 import { useState, ChangeEvent } from "react";
 import { TextField } from "@mui/material";
 
 type EditSpanPropsType = {
   title: string;
-  onChangeTitle: (value:string) => void
+  onChangeTitle: (value: string) => void;
 };
 
-export const EditSpan = (props: EditSpanPropsType) => {
+export const EditSpan = React.memo((props: EditSpanPropsType) => {
+  console.log("EditSpan");
+
   const [editMode, setEditMode] = useState(false);
   const [title, setTitle] = useState("");
 
@@ -16,7 +19,7 @@ export const EditSpan = (props: EditSpanPropsType) => {
   };
   const activeViewMode = () => {
     setEditMode(false);
-    props.onChangeTitle(title)
+    props.onChangeTitle(title);
   };
 
   const onChangeTitle = ({ currentTarget }: ChangeEvent<HTMLInputElement>) => {
@@ -36,4 +39,4 @@ export const EditSpan = (props: EditSpanPropsType) => {
   ) : (
     <span onDoubleClick={activeEditMode}>{props.title}</span>
   );
-};
+});

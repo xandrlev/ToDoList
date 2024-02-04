@@ -83,22 +83,18 @@ export const tasksReducer = (
     }
     case "CHANGE-STATUS-TASK": {
       const copyState = { ...state };
-
-      // copyState[action.toDoListId].map((e) =>
-      //   e.id === action.taskId ? { ...e, isDone: action.isDone } : e
-      // );
-      // return copyState;
-
       const tasks = copyState[action.toDoListId];
-      const task = tasks.find((t) => t.id === action.taskId);
-      if (task) task.isDone = action.isDone;
+      copyState[action.toDoListId] = tasks.map((item) =>
+        item.id === action.taskId ? { ...item, isDone: action.isDone } : item
+      );
       return copyState;
     }
     case "CHANGE-TITLE-TASK": {
       const copyState = { ...state };
-      const toDoList = copyState[action.toDoListId];
-      const task = toDoList.find((t) => t.id === action.taskId);
-      if (task) task.title = action.title;
+      const tasks = copyState[action.toDoListId];
+      copyState[action.toDoListId] = tasks.map((item) =>
+        item.id === action.taskId ? { ...item, title: action.title } : item
+      );
       return copyState;
     }
     case "ADD-TODOLIST": {

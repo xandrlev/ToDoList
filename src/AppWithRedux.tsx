@@ -26,6 +26,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { rootReducerType } from "./store/store";
+import { useCallback } from "react";
 
 export type FilterValuesType = "all" | "active" | "completed";
 
@@ -48,45 +49,61 @@ function AppWithReducer() {
     (state) => state.tasks
   );
 
-  const removeTask = (toDoListId: string, taskId: string) => {
-    dispatch(removeTaskAC(taskId, toDoListId));
-  };
+  const removeTask = useCallback(
+    (toDoListId: string, taskId: string) => {
+      dispatch(removeTaskAC(taskId, toDoListId));
+    },
+    [dispatch]
+  );
 
-  const addItem = (title: string, toDoListId: string) => {
-    dispatch(addTaskAC(toDoListId, title));
-  };
+  const addItem = useCallback(
+    (title: string, toDoListId: string) => {
+      dispatch(addTaskAC(toDoListId, title));
+    },
+    [dispatch]
+  );
 
-  const changeFilter = (filter: FilterValuesType, id: string) => {
-    dispatch(filterToDoListAC(filter, id));
-  };
+  const changeFilter = useCallback(
+    (filter: FilterValuesType, id: string) => {
+      dispatch(filterToDoListAC(filter, id));
+    },
+    [dispatch]
+  );
 
-  const changeTaskStatus = (
-    taskId: string,
-    isDone: boolean,
-    toDoListId: string
-  ) => {
-    dispatch(changeStatusAC(toDoListId, isDone, taskId));
-  };
+  const changeTaskStatus = useCallback(
+    (taskId: string, isDone: boolean, toDoListId: string) => {
+      dispatch(changeStatusAC(toDoListId, isDone, taskId));
+    },
+    [dispatch]
+  );
 
-  const changeTaskTitle = (
-    toDoListId: string,
-    taskId: string,
-    newTitle: string
-  ) => {
-    dispatch(changeTaskTitleAC(toDoListId, taskId, newTitle));
-  };
+  const changeTaskTitle = useCallback(
+    (toDoListId: string, taskId: string, newTitle: string) => {
+      dispatch(changeTaskTitleAC(toDoListId, taskId, newTitle));
+    },
+    [dispatch]
+  );
 
-  const changeToDoListTitle = (toDoListID: string, newTitle: string) => {
-    dispatch(changeToDoListTitleAC(toDoListID, newTitle));
-  };
+  const changeToDoListTitle = useCallback(
+    (toDoListID: string, newTitle: string) => {
+      dispatch(changeToDoListTitleAC(toDoListID, newTitle));
+    },
+    [dispatch]
+  );
 
-  const removeToDoList = (toDoListId: string) => {
-    dispatch(removeToDoListAC(toDoListId));
-  };
+  const removeToDoList = useCallback(
+    (toDoListId: string) => {
+      dispatch(removeToDoListAC(toDoListId));
+    },
+    [dispatch]
+  );
 
-  const addToDoList = (title: string) => {
-    dispatch(addToDoListAC(title));
-  };
+  const addToDoList = useCallback(
+    (title: string) => {
+      dispatch(addToDoListAC(title));
+    },
+    [dispatch]
+  );
 
   return (
     <div className="App">
@@ -116,12 +133,6 @@ function AppWithReducer() {
         <Grid container spacing={5}>
           {todoLists.map((item) => {
             let statusToDoList = tasks[item.id];
-
-            item.filter === "active"
-              ? (statusToDoList = tasks[item.id].filter((item) => !item.isDone))
-              : item.filter === "completed"
-              ? (statusToDoList = tasks[item.id].filter((item) => item.isDone))
-              : (statusToDoList = tasks[item.id]);
 
             return (
               <Grid item key={item.id}>
